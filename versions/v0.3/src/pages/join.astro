@@ -18,8 +18,11 @@ import Layout from '../layouts/Layout.astro';
 
       <div class="join-discord">
         <span class="discord-label font-mono">DISCORD</span>
+        <a href="https://discord.gg/NTPgKwrTaH" target="_blank" rel="noopener noreferrer" class="discord-button">
+          <span class="discord-button-text">JOIN DISCORD</span>
+        </a>
         <div class="discord-code">NTPgKwrTaH</div>
-        <p class="discord-hint font-mono">Join our server and say hello!</p>
+        <p class="discord-hint font-mono">Click the button or copy the code above</p>
       </div>
 
       <div class="join-contacts">
@@ -127,6 +130,32 @@ import Layout from '../layouts/Layout.astro';
     font-size: 0.65rem;
     color: #8b9cf7;
     font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .discord-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.5rem;
+    background: #5865f2;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .discord-button:hover {
+    background: #4752c4;
+    box-shadow: 0 0 20px rgba(88, 101, 242, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .discord-button-text {
+    font-family: 'Space Grotesk', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
     letter-spacing: 0.08em;
   }
 

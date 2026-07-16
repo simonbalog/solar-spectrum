@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
   "name": "mellotech",
-=======
-  "name": "solar-spectrum",
->>>>>>> 4c4af82f5d52777863c8bbe3a0dfe4695fdb1612
   "type": "module",
   "version": "0.0.1",
   "engines": {

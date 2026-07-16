@@ -9,7 +9,7 @@ interface Goal {
 const goals: Goal[] = [
   {
     id: "01",
-    title: "Fly Cassiopeia I to 2500 m",
+    title: "Fly Cassiopeia I to 750 m",
     description: "Reach target apogee with full telemetry stream and successful data recovery.",
     tag: "MISSION"
   },
@@ -27,15 +27,15 @@ const goals: Goal[] = [
   },
   {
     id: "04",
-    title: "Compete at EuRoC",
-    description: "Qualify and compete at the European Rocketry Challenge (EuRoC).",
+    title: "Win Czech Rocket Challenge with Cassiopeia II",
+    description: "Design and fly Cassiopeia II powered by our fully custom in-house OBC and compete for the top spot at the Czech Rocket Challenge.",
     tag: "COMPETITION"
   },
   {
     id: "05",
-    title: "Build a Sustainable Engineering Pipeline",
-    description: "Create documented, reusable knowledge and processes for future student cohorts.",
-    tag: "LEGACY"
+    title: "Reach EuRoC with Cassiopeia III",
+    description: "Qualify and compete at the European Rocketry Challenge (EuRoC) with Cassiopeia III — the culmination of everything we've learned.",
+    tag: "EUROC"
   }
 ];
 ---
@@ -157,11 +157,11 @@ const goals: Goal[] = [
   }
 
   /* Tag color variants */
-  .tag-mission   { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25); }
-  .tag-hardware  { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.25); }
-  .tag-guidance  { background: rgba(6, 182, 212, 0.12);  color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.25); }
-  .tag-competition { background: rgba(249, 115, 22, 0.12); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.25); }
-  .tag-legacy    { background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.25); }
+  .tag-mission      { background: rgba(59, 130, 246, 0.12); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.25); }
+  .tag-hardware     { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.25); }
+  .tag-guidance     { background: rgba(6, 182, 212, 0.12);  color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.25); }
+  .tag-competition  { background: rgba(249, 115, 22, 0.12); color: var(--accent-orange); border: 1px solid rgba(249, 115, 22, 0.25); }
+  .tag-euroc        { background: rgba(16, 185, 129, 0.12); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.25); }
 
   .goal-desc {
     font-size: 0.8rem;

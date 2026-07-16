@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import TelemetryConsole from '../components/TelemetryConsole.astro';
 import Goals from '../components/Goals.astro';
 import MissionCard from '../components/MissionCard.astro';
 import Obc from '../components/Obc.astro';
@@ -22,9 +21,6 @@ const cassiopeiaMilestones = [
   <!-- Header Section -->
   <Header />
 
-  <!-- Live Telemetry Stream -->
-  <TelemetryConsole />
-
   <!-- Goals — full width, above main columns -->
   <Goals />
 
@@ -38,7 +34,7 @@ const cassiopeiaMilestones = [
           name="Cassiopeia I"
           status="Active Development"
           progress={35}
-          targetApogee="2500 m"
+          targetApogee="750 m"
           launchSite="Třebíč, Czech Republic"
           milestones={cassiopeiaMilestones}
         />

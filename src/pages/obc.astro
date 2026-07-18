@@ -1,0 +1,275 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Onboard Computer | Mellotech">
+  <main class="obc-page">
+    <div class="obc-content glass-panel">
+      <div class="obc-glow-bar"></div>
+
+      <span class="obc-section-tag font-mono">AVIONICS DEEP DIVE</span>
+      <h1 class="obc-page-title">The Onboard Computer</h1>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">Overview</h2>
+        <p class="obc-text">
+          Our OBC is built around the <strong>STM32H743</strong> — a 480 MHz ARM Cortex-M7
+          microcontroller with hardware floating point and enough peripheral bandwidth to run
+          sensor fusion, actuator control, telemetry, and high-rate data logging concurrently,
+          in real time, on a single board. Everything downstream of "the rocket needs to fly
+          itself" runs through this chip.
+        </p>
+        <p class="obc-text">
+          The board is organized into independent, purpose-built sections — not because it
+          looks impressive on a schematic, but because isolating them is what makes the whole
+          system trustworthy in flight.
+        </p>
+      </section>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">Power</h2>
+        <p class="obc-text">
+          Flight electronics fail more often from bad power than bad code. Our power section
+          starts with reverse-polarity protection built around a P-channel MOSFET rather than
+          a simple diode — it costs a few more components, but drops essentially zero voltage
+          under load, instead of wasting energy (and battery margin) as heat the way a diode would.
+        </p>
+        <p class="obc-text">
+          From there, the board splits into two <strong>independently regulated rails</strong>:
+          a 5V line dedicated to actuator power, and a separate 3.3V line for the MCU, sensors,
+          and radio. They're deliberately isolated from each other. Servos draw sharp, noisy
+          current spikes when they move — without separation, that noise would ride straight
+          into the analog sensor readings and corrupt exactly the data we need to be cleanest.
+        </p>
+      </section>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">Sensing & State Estimation</h2>
+        <p class="obc-text">
+          Altitude and orientation come from two sensors working together: a <strong>BME280</strong>
+          barometric sensor for altitude, and a <strong>BNO055</strong> 9-axis IMU (accelerometer,
+          gyroscope, magnetometer with onboard sensor fusion) for orientation and rotational state.
+        </p>
+        <p class="obc-text">
+          The IMU isn't soldered next to the rest of the board — it lives on its own small
+          daughtercard, connected by cable, so it can be physically positioned wherever gives
+          the cleanest inertial reference in the airframe, away from the electromagnetic noise
+          of the board's own switching power regulators. Small decision, meaningful signal
+          quality difference.
+        </p>
+      </section>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">Guidance & Actuation</h2>
+        <p class="obc-text">
+          This is what turns "we built a flight computer" into "we built a flight computer
+          that flies the rocket." A dedicated PWM driver (<strong>PCA9685</strong>) commands
+          up to 5 servo channels: four actuate airbrakes for <strong>active drag modulation</strong>,
+          letting the vehicle trim its own trajectory in real time to hit a target apogee instead
+          of relying purely on motor selection and hoping — and one drives the nosecone release
+          mechanism for parachute deployment.
+        </p>
+        <p class="obc-text">
+          Splitting guidance and recovery onto dedicated, addressable channels means both
+          systems can be commanded independently and verified in ground testing before they're
+          ever trusted in the air.
+        </p>
+      </section>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">Telemetry & Data Logging</h2>
+        <p class="obc-text">
+          Two data paths run in parallel during flight. A <strong>LoRa radio link</strong>
+          streams live telemetry to the ground station, so the team can watch the flight unfold
+          in real time, not just after recovery. Simultaneously, the MCU logs flight data at
+          high rate to onboard microSD storage over a dedicated SDMMC interface — fast enough
+          to capture the full sensor bandwidth we actually need for meaningful post-flight
+          analysis.
+        </p>
+        <p class="obc-text">
+          If the radio link drops, the flight is still fully recorded. If the rocket is never
+          recovered, the team still watched it happen live. Neither data path depends on the other.
+        </p>
+      </section>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">From Schematic to Silicon</h2>
+        <p class="obc-text">
+          Every part of this board — component selection, schematic capture, PCB layout, and
+          design rule checks — is done in-house using <strong>KiCad</strong>. Nothing here is
+          a purchased module bolted together on a breadboard; it's a purpose-built, multi-layer
+          circuit board designed the same way an industry avionics team would approach it,
+          scaled to what a student team can build and fly.
+        </p>
+      </section>
+
+      <section class="obc-section">
+        <h2 class="obc-heading">Where We Are Now</h2>
+        <ul class="obc-status-list">
+          <li class="obc-status-item">
+            <span class="status-check">&#10003;</span>
+            Power board — designed, built, and tested
+          </li>
+          <li class="obc-status-item">
+            <span class="status-check">&#10003;</span>
+            Sensor board — designed, built, and tested
+          </li>
+          <li class="obc-status-item">
+            <span class="status-working">&#9711;</span>
+            Main OBC — in active development, integrating power, sensing, guidance, and telemetry onto a single flight-ready board
+          </li>
+        </ul>
+        <p class="obc-text obc-closing">
+          What ships on Cassiopeia I is the first flight-proven version of this architecture.
+          What we learn flying it becomes the starting point for Cassiopeia II.
+        </p>
+      </section>
+
+      <a href="/" class="obc-back font-mono">← BACK TO DASHBOARD</a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .obc-page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+    min-height: calc(100vh - 4rem);
+  }
+
+  .obc-content {
+    max-width: 680px;
+    width: 100%;
+    padding: 2.5rem;
+    background: rgba(8, 12, 24, 0.85);
+    border-color: rgba(139, 92, 246, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .obc-glow-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #8b5cf6, #06b6d4, transparent);
+  }
+
+  .obc-section-tag {
+    font-size: 0.65rem;
+    color: #a78bfa;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+  }
+
+  .obc-page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+    margin: 0;
+  }
+
+  .obc-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .obc-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+  }
+
+  .obc-text {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .obc-text strong {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .obc-text a {
+    color: var(--accent-cyan);
+    text-decoration: none;
+  }
+
+  .obc-status-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .obc-status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .status-check {
+    color: var(--accent-emerald);
+    font-weight: 700;
+    font-size: 1rem;
+    width: 16px;
+    text-align: center;
+  }
+
+  .status-working {
+    color: var(--accent-orange);
+    font-size: 1rem;
+    width: 16px;
+    text-align: center;
+  }
+
+  .obc-closing {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(139, 92, 246, 0.1);
+  }
+
+  .obc-back {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease;
+    align-self: flex-start;
+  }
+
+  .obc-back:hover {
+    color: var(--accent-cyan);
+  }
+
+  .font-mono {
+    font-family: 'Space Grotesk', monospace;
+  }
+
+  @media (max-width: 640px) {
+    .obc-content {
+      padding: 1.5rem;
+    }
+    .obc-page-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

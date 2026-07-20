@@ -9,13 +9,8 @@
         <span class="status-text font-mono">SYS_STATUS: ACTIVE</span>
       </div>
       <div class="title-group">
-        <div class="logo-icon">
-          <img src="/mellotech/logo-icon.png" alt="M" width="48" height="48" />
-        </div>
-        <div>
-          <img src="/mellotech/big_logo.svg" alt="MELLOTECH" class="logo-title" />
-          <p class="subtitle font-mono">STUDENT ROCKET DEVELOPMENT TEAM</p>
-        </div>
+        <img src="/mellotech/big_logo.svg" alt="MELLOTECH" class="logo-title" />
+        <p class="subtitle font-mono">STUDENT ROCKET DEVELOPMENT TEAM</p>
       </div>
     </div>
     
@@ -104,14 +99,6 @@
     font-weight: 600;
   }
 
-  .logo-icon {
-    flex-shrink: 0;
-  }
-
-  .logo-icon img {
-    display: block;
-  }
-
   .title-group {
     display: flex;
     align-items: center;
@@ -119,7 +106,7 @@
   }
 
   .logo-title {
-    height: 2.6rem;
+    height: 4rem;
     width: auto;
     display: block;
     margin: 0;
@@ -128,7 +115,7 @@
   .subtitle {
     color: var(--accent-cyan);
     font-weight: 500;
-    margin-top: 0.25rem;
+    white-space: nowrap;
   }
 
   .header-decoration {
@@ -189,12 +176,8 @@
   }
 
   @media (max-width: 640px) {
-    .title-group {
-      flex-wrap: wrap;
-    }
-
     .logo-title {
-      height: 1.8rem;
+      height: 2.4rem;
     }
     
     .header-main {
